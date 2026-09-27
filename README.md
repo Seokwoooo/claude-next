@@ -25,19 +25,12 @@ Slash commands are handled differently. Claude Code **holds them until the turn 
 
 ## See it for real
 
-Same task, same follow-up, real Claude Code 2.1.283 sessions.
+A real Claude Code 2.1.283 session in Ghostty: the same bug fix twice, once with a plain Enter and once with `/next`. Waiting stretches are sped up, and the badge in the corner shows by how much.
 
-### ✕ Enter
+<img src="assets/demo-en.gif" width="960" alt="Recorded in Claude Code. With Enter, 'add a test for an empty list' lands right after the fix, before the tests ran, and both requests end in one reply. With /next, it waits while Claude fixes the bug and runs the tests, then runs as a new turn.">
 
-<img src="assets/demo-enter.gif" width="864" alt="The follow-up lands right after lint, before test and build run, and the summary and release note come back in one reply.">
-
-The follow-up lands right after `lint`, before `test` and `build` have run. The summary and the release note come back blended into one reply.
-
-### ✓ /next
-
-<img src="assets/demo-next.gif" width="864" alt="The /next request waits, dimmed, while lint, test and build run, then goes in as a new turn after the task is done.">
-
-The request waits (dimmed) while `lint`, `test` and `build` run, then goes in as a fresh turn once the task is done.
+- **✕ Enter:** "add a test for an empty list" lands right after the fix, before the tests have even run. Claude handles both in one turn and answers them in one reply.
+- **✓ /next:** the same request waits while Claude fixes the bug and runs the tests. Once that turn ends, it runs as a new turn of its own.
 
 ## Install
 

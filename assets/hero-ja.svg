@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="880" height="400" viewBox="0 0 880 400" role="img" lang="ja">
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="336" viewBox="0 0 880 336" role="img" lang="ja">
 <title>Enter vs /next</title>
-<desc>Claude の作業中に次の依頼を入力すると: Enter — 作業の途中に割り込む, 依頼2つ、返答1つ. /next — 待機中, 完了後に単独で実行.</desc>
+<desc>Enter — 作業の途中に割り込む, 依頼2つ、返答1つ. /next — 待機中, 完了後に単独で実行.</desc>
 <style>
 @keyframes p10{0.00%{transform:scaleX(1)} 18.86%{transform:scaleX(1)} 18.95%{transform:scaleX(0)} 21.05%{transform:scaleX(0)} 23.68%{transform:scaleX(0)} 38.60%{transform:scaleX(1)} 85.96%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
 .p10{animation:p10 11.4s linear infinite;transform-box:fill-box;transform-origin:0 50%}
@@ -56,10 +56,9 @@
 .scene{animation:scene 11.4s linear infinite;}
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
 </style>
-<rect x="0.5" y="0.5" width="879" height="399" rx="18" fill="#0d1117" stroke="#30363d"/>
+<rect x="0.5" y="0.5" width="879" height="335" rx="18" fill="#0d1117" stroke="#30363d"/>
 <g class="scene">
-<text x="32" y="44" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="17" font-weight="600" fill="#e6edf3" text-anchor="start">Claude の作業中に次の依頼を入力すると</text>
-<g transform="translate(0,64)">
+<g transform="translate(0,16)">
 <rect x="16" y="0" width="848" height="136" rx="12" fill="#161b22"/>
 <text x="36" y="66" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="28" font-weight="700" fill="#f85149" text-anchor="start">Enter</text>
 <text x="36" y="92" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="400" fill="#8b949e" text-anchor="start">通常メッセージ</text>
@@ -82,7 +81,7 @@
 <text x="844" y="118" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="700" fill="#f85149" text-anchor="end" class="out1">✕  依頼2つ、返答1つ</text>
 <g class="chipin1"><g class="chip1"><rect x="264" y="36" width="120" height="32" rx="16" fill="#388bfd" stroke="#f85149" class="hit" stroke-width="2.5"/><text x="324.0" y="57" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">リリースノート</text></g></g>
 </g>
-<g transform="translate(0,220)">
+<g transform="translate(0,168)">
 <rect x="16" y="0" width="848" height="136" rx="12" fill="#161b22"/>
 <text x="36" y="66" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="28" font-weight="700" fill="#3fb950" text-anchor="start">/next</text>
 <text x="36" y="92" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="400" fill="#8b949e" text-anchor="start">キューのコマンド</text>
@@ -104,6 +103,6 @@
 <text x="844" y="118" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="700" fill="#3fb950" text-anchor="end" class="out2">✓  完了後に単独で実行</text>
 <g class="chipin2"><g class="chip2 wait"><rect x="720" y="60" width="120" height="32" rx="16" fill="#238636" class="go" stroke="#3fb950" stroke-width="1.5"/><text x="780.0" y="81" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">リリースノート</text></g></g>
 </g>
-<text x="848" y="380" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="12" font-weight="600" fill="#484f58" text-anchor="end">claude-next</text>
+<text x="848" y="324" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="12" font-weight="600" fill="#484f58" text-anchor="end">claude-next</text>
 </g>
 </svg>

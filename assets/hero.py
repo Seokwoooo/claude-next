@@ -7,11 +7,10 @@ animation (or with reduced motion) still see the whole story.
 """
 from pathlib import Path
 
-W, H = 880, 400  # canvas size
+W, H = 880, 336  # canvas size
 
 STRINGS = {
     "en": dict(
-        header="You type a follow-up while Claude is still working",
         sub1="plain message", sub2="queued command",
         segs=("lint", "test", "build", "reply"),
         chip="release note", typed="typed mid-task",
@@ -19,7 +18,6 @@ STRINGS = {
         queued="queued", turn_end="turn ends", out2="✓  runs as its own turn",
     ),
     "ko": dict(
-        header="Claude가 작업하는 중에 다음 요청을 입력하면",
         sub1="일반 메시지", sub2="대기열 명령",
         segs=("lint", "test", "build", "답변"),
         chip="릴리스 노트", typed="작업 중 입력",
@@ -27,7 +25,6 @@ STRINGS = {
         queued="대기 중", turn_end="턴 종료", out2="✓  끝난 뒤 따로 실행",
     ),
     "ja": dict(
-        header="Claude の作業中に次の依頼を入力すると",
         sub1="通常メッセージ", sub2="キューのコマンド",
         segs=("lint", "test", "build", "返答"),
         chip="リリースノート", typed="作業中に入力",
@@ -209,10 +206,9 @@ def build(lang):
     anim = Anim()
     body = [
         f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="18" fill="{C["bg"]}" stroke="{C["line"]}"/>',
-        text(32, 44, s["header"], 17, C["text"], 600),
-        lane(anim, 1, 64, s, "Enter", C["red"]),
-        lane(anim, 2, 220, s, "/next", C["green"]),
-        text(W - 32, H - 20, "claude-next", 12, "#484f58", 600, "end", MONO),
+        lane(anim, 1, 16, s, "Enter", C["red"]),
+        lane(anim, 2, 168, s, "/next", C["green"]),
+        text(W - 32, H - 12, "claude-next", 12, "#484f58", 600, "end", MONO),
     ]
     scene = anim.add("scene", [(0, "opacity:1"), (RESET - 0.35, "opacity:1"), (RESET - 0.05, "opacity:0"),
                                (START - 0.1, "opacity:0"), (START + 0.1, "opacity:1"), (LOOP, "opacity:1")],
@@ -220,7 +216,7 @@ def build(lang):
     css = "\n".join(anim.rules)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" lang="{lang}">
 <title>Enter vs /next</title>
-<desc>{s["header"]}: Enter — {s["mid"]}, {s["out1"][3:]}. /next — {s["queued"]}, {s["out2"][3:]}.</desc>
+<desc>Enter — {s["mid"]}, {s["out1"][3:]}. /next — {s["queued"]}, {s["out2"][3:]}.</desc>
 <style>
 {css}
 @media (prefers-reduced-motion: reduce) {{ * {{ animation: none !important; }} }}

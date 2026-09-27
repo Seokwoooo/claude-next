@@ -6,7 +6,7 @@
 
 English · [한국어](README.ko.md) · [日本語](README.ja.md)
 
-<img src="assets/hero-en.svg" width="880" alt="Typed with Enter, a follow-up is delivered mid-task and both requests end up in one reply. Typed with /next, it waits in the queue and runs as its own turn once the task is done.">
+<img src="assets/demo-en.gif" width="960" alt="Recorded in Claude Code. With Enter, 'add a test for an empty list' lands right after the fix, before the tests ran, and both requests end in one reply. With /next, it waits while Claude fixes the bug and runs the tests, then runs as a new turn.">
 
 </div>
 
@@ -22,15 +22,6 @@ Slash commands are handled differently. Claude Code **holds them until the turn 
 |---|---|---|
 | `release note please` ⏎ | right after the current tool call, **mid-task** | both requests handled in one turn |
 | `/next release note please` ⏎ | **after the turn ends** | a clean, separate turn, in order |
-
-## See it for real
-
-A real Claude Code 2.1.283 session in Ghostty: the same bug fix twice, once with a plain Enter and once with `/next`. Waiting stretches are sped up, and the badge in the corner shows by how much.
-
-<img src="assets/demo-en.gif" width="960" alt="Recorded in Claude Code. With Enter, 'add a test for an empty list' lands right after the fix, before the tests ran, and both requests end in one reply. With /next, it waits while Claude fixes the bug and runs the tests, then runs as a new turn.">
-
-- **✕ Enter:** "add a test for an empty list" lands right after the fix, before the tests have even run. Claude handles both in one turn and answers them in one reply.
-- **✓ /next:** the same request waits while Claude fixes the bug and runs the tests. Once that turn ends, it runs as a new turn of its own.
 
 ## Install
 

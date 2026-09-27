@@ -10,54 +10,43 @@
 
 </div>
 
-## なぜ必要か
-
-Claude が作業の途中で、次に頼みたいことがもう決まっている。入力して Enter を押します。
-
-このメッセージは待ってくれません。Claude Code は実行中のツール呼び出しが終わった時点で、**作業の途中に**このメッセージを Claude に渡します。Claude は1つのターンで2つの依頼を同時に抱えることになり、返答も混ざって返ってきます。
-
-スラッシュコマンドは扱いが違います。Claude Code はコマンドを**今のターンが終わるまで保留し**、入力した順に1つずつ実行します（[公式ドキュメント](https://code.claude.com/docs/en/interactive-mode#when-claude-code-sends-what-you-queued)）。`/next` はこのキューを利用する1行だけのスキルです。
-
-| Claude の作業中に入力すると | Claude に届くタイミング | 結果 |
-|---|---|---|
-| `リリースノートを書いて` ⏎ | 実行中のツール呼び出しの直後、**作業の途中** | 2つの依頼を1つのターンでまとめて処理 |
-| `/next リリースノートを書いて` ⏎ | **ターンが終わった後** | 順番どおり、独立したターンで実行 |
-
 ## インストール
 
-クローン不要の1行コマンド:
-
 ```bash
-mkdir -p ~/.claude/skills/next && curl -fsSL https://raw.githubusercontent.com/Seokwoooo/claude-next/main/skills/next/SKILL.md -o ~/.claude/skills/next/SKILL.md
+npx claude-next-skill
 ```
 
-または、クローンしてリンクします。`git pull` するだけで最新の状態に保てます。
+または、以下を Claude Code（ほかのコーディングエージェントでも可）に貼り付ければ、自動でインストールしてくれます。
 
-```bash
-git clone https://github.com/Seokwoooo/claude-next.git
-cd claude-next && ./install.sh     # 削除: ./install.sh --uninstall
+```text
+Claude Code 用の /next スキルをインストールして。`npx -y claude-next-skill` を実行すればいい。
+npx が使えない場合は https://raw.githubusercontent.com/Seokwoooo/claude-next/main/skills/next/SKILL.md をダウンロードして、内容を変えずに ~/.claude/skills/next/SKILL.md として保存して。
+終わったら、Claude Code のセッションを新しく開くように教えて。
 ```
 
-Windows では [`skills/next/SKILL.md`](skills/next/SKILL.md) を `%USERPROFILE%\.claude\skills\next\SKILL.md` として保存してください。
-
-インストール後、Claude Code のセッションを新しく開いて `/next` と入力します。
+インストール後は Claude Code のセッションを新しく開いてください。
 
 ## 使い方
 
+Claude の作業中に、こう入力します。
+
 ```text
-/next テストを全部実行して、失敗したものを直して
+/next テストを実行して、失敗したものを直して
 ```
 
-- **複数予約する。** `/next` ごとに Enter を押してください。入力した順に、それぞれ独立したターンとして実行されます。前の依頼がツール呼び出しも含めて終わるまで、次の依頼は届きません。
-- **取り消す・直す。** 入力欄が空のときに `↑` を押すと、キューにある依頼がすべて入力欄に戻ります（1行に1つ）。不要な行を消して（`Ctrl+U` で1行削除、macOS のターミナルでは `Cmd+Backspace` も可）Enter を押すと残りが再予約されます。入力欄を空のままにすれば全部取り消せます。
-  - Claude の作業中に入力欄を消そうとして `Ctrl+C` を押さないでください。作業が中断されます。
-  - 再予約した行は**1つの**項目にまとめられます。1行なら問題ありませんが、複数を別々に実行したい場合は1つずつ入れ直してください。
-- **早めに切り上げる。** `Esc` で今のターンを中断すると、予約した `/next` がすぐに実行されます。
-- `/next` はメッセージの先頭にあるときだけコマンドとして認識されます。
+今のターンが終わるまで待ってから、新しいターンとして実行されます。
 
-## 仕組み
+- **複数予約する：** 1つ入力するたびに Enter を押します。入力した順に1つずつ実行されます。
+- **取り消す：** 入力欄が空のときに `↑` を押し、その行を消して Enter を押します。このとき `Ctrl+C` は使わないでください。Claude の作業が止まります。
 
-スキルの中身はこれだけです。
+## なぜ必要か
+
+Claude の作業中に送った通常のメッセージは、実行中のツール呼び出しが終わった時点で、作業の途中に Claude へ渡されます。スラッシュコマンドはターンが終わるまで待ちます（[公式ドキュメント](https://code.claude.com/docs/en/interactive-mode#when-claude-code-sends-what-you-queued)）。`/next` はこの仕組みを使った1行だけのスキルです。
+
+<details>
+<summary><b>仕組み</b></summary>
+
+スキルの中身はこれだけです（[`skills/next/SKILL.md`](skills/next/SKILL.md)）。
 
 ```markdown
 ---
@@ -70,34 +59,46 @@ disable-model-invocation: true
 Treat the following as the user's follow-up request and carry it out now, continuing from the current conversation: $ARGUMENTS
 ```
 
-- **待つのはスキルではありません。** ターンが終わるまで `/next` を保留するのは Claude Code のコマンドキューです。スキルは自分の番が来たときに依頼を渡すだけなので、監視や保存の仕組みは要りません。
-- **実行できるのはユーザーだけ。** `disable-model-invocation: true` により、Claude はスキル一覧でこのスキルを見ることも、自分で呼び出すこともできません。説明文もコンテキストを消費しません。
-- **コンテキストは最小限。** 先頭の設定部分（frontmatter）は Claude に送られません。`/next` が実行されると、Claude が受け取るのは本文の1行とあなたの依頼だけです。
+- 待つのは Claude Code のコマンドキューです。スキルは自分の番が来たときに依頼を渡すだけです。
+- `disable-model-invocation: true` なので、実行できるのはユーザーだけです。Claude はスキル一覧でこのスキルを見られず、使うまではコンテキストも消費しません。
 - 本文は英語ですが、依頼は入力した言語のまま渡されます。
 
-## 検証
+</details>
 
-[`tests/verify.sh`](tests/verify.sh) は tmux の中で実際の対話型 Claude Code セッションを起動します。複数ステップの作業が走っている間に `/next` を2つキューに入れ、セッションの記録を読んで、何がいつ Claude に届いたかを確認します。
+<details>
+<summary><b>更新・削除・手動インストール</b></summary>
+
+- 更新：`npx claude-next-skill` をもう一度実行します。
+- 削除：`npx claude-next-skill uninstall`
+- Node なしでインストール：[`skills/next/SKILL.md`](skills/next/SKILL.md) を `~/.claude/skills/next/SKILL.md` として保存します（Windows では `%USERPROFILE%\.claude\skills\next\SKILL.md`）。
+
+</details>
+
+<details>
+<summary><b>検証</b></summary>
+
+[`tests/verify.sh`](tests/verify.sh) は tmux の中で実際の Claude Code セッションを起動します。複数ステップの作業中に `/next` を2つ入れ、セッションの記録を読んで、何がいつ Claude に届いたかを確認します。Claude Code 2.1.283（macOS）で通過しています。
 
 ```text
-✓ first turn ended with FIRST_DONE
 ✓ both /next were queued during the first turn (2/2)
 ✓ neither /next reached Claude during the first turn (leaks: 0)
-✓ the first /next used tools (2 tool calls)
 ✓ the second /next didn't reach Claude during the first /next (leaks: 0)
 ✓ each /next ran as its own turn (2/2)
 ✓ reply order: FIRST_DONE -> SECOND_DONE -> THIRD_DONE
-PASS
 ```
 
-Claude Code 2.1.283（macOS）で通過しています。比較のため通常のメッセージを同じ方法で入れたところ、最初のツール呼び出しの直後に届きました。Claude Code を更新したら `tests/verify.sh` をもう一度実行してください。`tmux` と `jq` が必要で、Haiku なら1分ほどで終わります。
+Claude Code を更新したら、もう一度実行してください（`tmux` と `jq` が必要）。
 
-## 制限
+</details>
 
-- 「終わった」とは**メインのターンが終わった**という意味です。Claude がバックグラウンドで動かしているコマンドやエージェントは、まだ実行中かもしれません。
-- 権限の確認はそのまま適用されます。`/next` で承認を省略することはできません。
-- 個人スキル（`~/.claude/skills`）なので、自分のマシンのローカルセッションでのみ読み込まれます。クラウドセッションでは使えません。
-- Claude Code のコマンドキューに依存しています。将来のバージョンで挙動が変わった場合は `tests/verify.sh` が検出します。
+<details>
+<summary><b>制限</b></summary>
+
+- 待つのはメインのターンの終了までです。Claude がバックグラウンドで動かしている作業の完了までは待ちません。
+- 権限の確認はそのまま適用されます。
+- 個人スキルなので、自分のマシンのローカルセッションでのみ動作し、クラウドセッションでは使えません。
+
+</details>
 
 ## ライセンス
 

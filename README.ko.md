@@ -25,19 +25,12 @@ Claude가 작업을 절반쯤 하고 있는데 다음에 시킬 일이 벌써 �
 
 ## 실제 화면
 
-같은 작업, 같은 후속 요청으로 녹화한 실제 Claude Code 2.1.283 세션입니다.
+Ghostty에서 실제 Claude Code 2.1.283을 녹화했습니다. 같은 버그 수정을 두 번 시키고, 한 번은 그냥 Enter로, 한 번은 `/next`로 다음 요청을 보냅니다. 기다리는 구간은 빠르게 돌렸고, 오른쪽 위에 배속을 표시했습니다.
 
-### ✕ Enter
+<img src="assets/demo-ko.gif" width="960" alt="실제 Claude Code 녹화. Enter로 보내면 'add a test for an empty list'가 버그 수정 직후, 테스트를 돌리기도 전에 끼어들고 두 요청이 한 답변으로 끝납니다. /next로 보내면 Claude가 버그를 고치고 테스트를 돌리는 동안 기다렸다가 새 턴으로 실행됩니다.">
 
-<img src="assets/demo-enter.gif" width="864" alt="후속 요청이 lint 직후, test와 build가 실행되기 전에 들어가고, 요약과 릴리스 노트가 한 응답으로 나옵니다.">
-
-후속 요청이 `lint` 직후, `test`와 `build`가 돌기도 전에 들어갑니다. 요약과 릴리스 노트가 한 응답에 섞여서 나옵니다.
-
-### ✓ /next
-
-<img src="assets/demo-next.gif" width="864" alt="/next 요청은 lint, test, build가 도는 동안 흐리게 대기하다가 작업이 끝난 뒤 새 턴으로 들어갑니다.">
-
-`lint`, `test`, `build`가 도는 동안 요청은 흐리게 표시된 채 기다립니다. 작업이 끝나면 새 턴으로 들어갑니다.
+- **✕ Enter:** "add a test for an empty list"가 버그 수정 직후, 테스트를 돌리기도 전에 끼어듭니다. Claude는 두 요청을 한 턴에서 처리하고 한 답변으로 끝냅니다.
+- **✓ /next:** 같은 요청이 Claude가 버그를 고치고 테스트를 돌리는 동안 기다립니다. 그 턴이 끝나면 새 턴으로 따로 실행됩니다.
 
 ## 설치
 

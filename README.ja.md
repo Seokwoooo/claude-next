@@ -25,19 +25,12 @@ Claude が作業の途中で、次に頼みたいことがもう決まってい�
 
 ## 実際の画面
 
-同じ作業、同じ依頼で録画した実際の Claude Code 2.1.283 のセッションです。
+Ghostty で実際の Claude Code 2.1.283 を録画しました。同じバグ修正を2回頼み、1回目は普通に Enter で、2回目は `/next` で次の依頼を送ります。待ち時間は早送りしていて、右上に倍速を表示しています。
 
-### ✕ Enter
+<img src="assets/demo-ja.gif" width="960" alt="実際の Claude Code の録画。Enter で送ると 'add a test for an empty list' がバグ修正の直後、テストの実行前に割り込み、2つの依頼が1つの返答で終わります。/next で送ると、Claude がバグを直してテストを実行する間は待ち、その後に新しいターンとして実行されます。">
 
-<img src="assets/demo-enter.gif" width="864" alt="依頼が lint の直後、test と build の前に届き、要約とリリースノートが1つの返答で返ってきます。">
-
-依頼は `lint` の直後、`test` と `build` が走る前に届きます。要約とリリースノートが1つの返答に混ざって返ってきます。
-
-### ✓ /next
-
-<img src="assets/demo-next.gif" width="864" alt="/next の依頼は lint、test、build の間は薄く表示されたまま待ち、作業が終わると新しいターンとして実行されます。">
-
-`lint`、`test`、`build` が走っている間、依頼は薄く表示されたまま待ちます。作業が終わると新しいターンとして実行されます。
+- **✕ Enter:** 「add a test for an empty list」がバグ修正の直後、テストを実行する前に割り込みます。Claude は2つの依頼を1つのターンで処理し、1つの返答にまとめます。
+- **✓ /next:** 同じ依頼が、Claude がバグを直してテストを実行している間は待ちます。そのターンが終わると、新しいターンとして単独で実行されます。
 
 ## インストール
 

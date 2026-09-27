@@ -6,7 +6,7 @@
 
 [English](README.md) · 한국어 · [日本語](README.ja.md)
 
-<img src="assets/hero-ko.svg" width="880" alt="Enter로 보낸 후속 요청은 작업 도중에 전달되어 두 요청의 답이 한 응답에 섞입니다. /next로 보낸 요청은 대기열에서 기다렸다가 작업이 끝난 뒤 따로 실행됩니다.">
+<img src="assets/demo-ko.gif" width="960" alt="실제 Claude Code 녹화. Enter로 보내면 'add a test for an empty list'가 버그 수정 직후, 테스트를 돌리기도 전에 끼어들고 두 요청이 한 답변으로 끝납니다. /next로 보내면 Claude가 버그를 고치고 테스트를 돌리는 동안 기다렸다가 새 턴으로 실행됩니다.">
 
 </div>
 
@@ -22,15 +22,6 @@ Claude가 작업을 절반쯤 하고 있는데 다음에 시킬 일이 벌써 �
 |---|---|---|
 | `릴리스 노트 써줘` ⏎ | 진행 중인 도구 호출 직후, **작업 도중** | 두 요청을 한 턴에서 함께 처리 |
 | `/next 릴리스 노트 써줘` ⏎ | **턴이 끝난 뒤** | 순서대로, 별도의 턴으로 깔끔하게 실행 |
-
-## 실제 화면
-
-Ghostty에서 실제 Claude Code 2.1.283을 녹화했습니다. 같은 버그 수정을 두 번 시키고, 한 번은 그냥 Enter로, 한 번은 `/next`로 다음 요청을 보냅니다. 기다리는 구간은 빠르게 돌렸고, 오른쪽 위에 배속을 표시했습니다.
-
-<img src="assets/demo-ko.gif" width="960" alt="실제 Claude Code 녹화. Enter로 보내면 'add a test for an empty list'가 버그 수정 직후, 테스트를 돌리기도 전에 끼어들고 두 요청이 한 답변으로 끝납니다. /next로 보내면 Claude가 버그를 고치고 테스트를 돌리는 동안 기다렸다가 새 턴으로 실행됩니다.">
-
-- **✕ Enter:** "add a test for an empty list"가 버그 수정 직후, 테스트를 돌리기도 전에 끼어듭니다. Claude는 두 요청을 한 턴에서 처리하고 한 답변으로 끝냅니다.
-- **✓ /next:** 같은 요청이 Claude가 버그를 고치고 테스트를 돌리는 동안 기다립니다. 그 턴이 끝나면 새 턴으로 따로 실행됩니다.
 
 ## 설치
 

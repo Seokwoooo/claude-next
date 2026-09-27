@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="400" viewBox="0 0 880 400" role="img" lang="ko">
+<title>Enter vs /next</title>
+<desc>Claude가 작업하는 중에 다음 요청을 입력하면: Enter — 작업 중간에 끼어듦, 요청 2개, 답변 1개. /next — 대기 중, 끝난 뒤 따로 실행.</desc>
+<style>
+@keyframes p10{0.00%{transform:scaleX(0)} 3.00%{transform:scaleX(0)} 20.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p10{animation:p10 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p11{0.00%{transform:scaleX(0)} 20.00%{transform:scaleX(0)} 38.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p11{animation:p11 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p12{0.00%{transform:scaleX(0)} 38.00%{transform:scaleX(0)} 54.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p12{animation:p12 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p13{0.00%{transform:scaleX(0)} 54.00%{transform:scaleX(0)} 64.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p13{animation:p13 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes mixfill{0.00%{fill:#d97757} 64.00%{fill:#d97757} 67.00%{fill:#da3633} 100.00%{fill:#da3633}}
+.mixfill{animation:mixfill 10.0s linear infinite;}
+@keyframes mixlabel0{0.00%{opacity:1} 64.00%{opacity:1} 67.00%{opacity:0} 100.00%{opacity:0}}
+.mixlabel0{animation:mixlabel0 10.0s linear infinite;}
+@keyframes mixlabel1{0.00%{opacity:0} 64.00%{opacity:0} 67.00%{opacity:1} 100.00%{opacity:1}}
+.mixlabel1{animation:mixlabel1 10.0s linear infinite;}
+@keyframes hint1{0.00%{opacity:0} 9.00%{opacity:0} 12.00%{opacity:1} 21.00%{opacity:1} 24.00%{opacity:0} 100.00%{opacity:0}}
+.hint1{animation:hint1 10.0s linear infinite;}
+@keyframes chip1{0.00%{transform:translate(448px,-22px)} 20.00%{transform:translate(448px,-22px)} 24.00%{transform:translate(0px,0px)} 100.00%{transform:translate(0px,0px)}}
+.chip1{animation:chip1 10.0s linear infinite;}
+@keyframes hit{0.00%{stroke:#388bfd} 23.50%{stroke:#388bfd} 24.50%{stroke:#f85149} 100.00%{stroke:#f85149}}
+.hit{animation:hit 10.0s linear infinite;}
+@keyframes mid{0.00%{opacity:0} 24.00%{opacity:0} 27.00%{opacity:1} 100.00%{opacity:1}}
+.mid{animation:mid 10.0s linear infinite;}
+@keyframes out1{0.00%{opacity:0} 66.00%{opacity:0} 69.00%{opacity:1} 100.00%{opacity:1}}
+.out1{animation:out1 10.0s linear infinite;}
+@keyframes chipin1{0.00%{opacity:0} 9.00%{opacity:0} 12.00%{opacity:1} 100.00%{opacity:1}}
+.chipin1{animation:chipin1 10.0s linear infinite;}
+@keyframes p20{0.00%{transform:scaleX(0)} 3.00%{transform:scaleX(0)} 20.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p20{animation:p20 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p21{0.00%{transform:scaleX(0)} 20.00%{transform:scaleX(0)} 38.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p21{animation:p21 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p22{0.00%{transform:scaleX(0)} 38.00%{transform:scaleX(0)} 54.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p22{animation:p22 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p23{0.00%{transform:scaleX(0)} 54.00%{transform:scaleX(0)} 64.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p23{animation:p23 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes hint2{0.00%{opacity:0} 9.00%{opacity:0} 12.00%{opacity:1} 21.00%{opacity:1} 24.00%{opacity:0} 100.00%{opacity:0}}
+.hint2{animation:hint2 10.0s linear infinite;}
+@keyframes chip2{0.00%{transform:translate(-8px,-46px)} 14.00%{transform:translate(-8px,-46px)} 18.00%{transform:translate(0px,0px)} 100.00%{transform:translate(0px,0px)}}
+.chip2{animation:chip2 10.0s linear infinite;}
+@keyframes wait{0.00%{opacity:1} 18.00%{opacity:1} 26.00%{opacity:.45} 36.00%{opacity:1} 46.00%{opacity:.45} 56.00%{opacity:1} 100.00%{opacity:1}}
+.wait{animation:wait 10.0s linear infinite;}
+@keyframes go{0.00%{fill:#388bfd;stroke:#388bfd;stroke-dasharray:none} 18.00%{fill:#161b22;stroke:#8b949e;stroke-dasharray:5 4} 64.00%{fill:#161b22;stroke:#8b949e;stroke-dasharray:5 4} 67.00%{fill:#238636;stroke:#3fb950;stroke-dasharray:none} 100.00%{fill:#238636;stroke:#3fb950;stroke-dasharray:none}}
+.go{animation:go 10.0s linear infinite;}
+@keyframes queued{0.00%{opacity:0} 18.00%{opacity:0} 20.00%{opacity:1} 64.00%{opacity:1} 66.00%{opacity:0} 100.00%{opacity:0}}
+.queued{animation:queued 10.0s linear infinite;}
+@keyframes div{0.00%{opacity:0} 64.00%{opacity:0} 67.00%{opacity:1} 100.00%{opacity:1}}
+.div{animation:div 10.0s linear infinite;}
+@keyframes out2{0.00%{opacity:0} 68.00%{opacity:0} 71.00%{opacity:1} 100.00%{opacity:1}}
+.out2{animation:out2 10.0s linear infinite;}
+@keyframes chipin2{0.00%{opacity:0} 9.00%{opacity:0} 12.00%{opacity:1} 100.00%{opacity:1}}
+.chipin2{animation:chipin2 10.0s linear infinite;}
+@keyframes scene{0.00%{opacity:0} 2.50%{opacity:1} 93.00%{opacity:1} 98.00%{opacity:0} 100.00%{opacity:0}}
+.scene{animation:scene 10.0s linear infinite;}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+<rect x="0.5" y="0.5" width="879" height="399" rx="18" fill="#0d1117" stroke="#30363d"/>
+<g class="scene">
+<text x="32" y="44" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="17" font-weight="600" fill="#e6edf3" text-anchor="start">Claude가 작업하는 중에 다음 요청을 입력하면</text>
+<g transform="translate(0,64)">
+<rect x="16" y="0" width="848" height="136" rx="12" fill="#161b22"/>
+<text x="36" y="66" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="28" font-weight="700" fill="#f85149" text-anchor="start">Enter</text>
+<text x="36" y="92" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="400" fill="#8b949e" text-anchor="start">일반 메시지</text>
+<rect x="200" y="60" width="120" height="32" rx="6" fill="#21262d" stroke="#30363d"/>
+<rect class="p10" x="200" y="60" width="120" height="32" rx="6" fill="#d97757"/>
+<text x="260.0" y="81" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="middle">lint</text>
+<rect x="328" y="60" width="120" height="32" rx="6" fill="#21262d" stroke="#30363d"/>
+<rect class="p11" x="328" y="60" width="120" height="32" rx="6" fill="#d97757"/>
+<text x="388.0" y="81" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="middle">test</text>
+<rect x="456" y="60" width="120" height="32" rx="6" fill="#21262d" stroke="#30363d"/>
+<rect class="p12" x="456" y="60" width="120" height="32" rx="6" fill="#d97757"/>
+<text x="516.0" y="81" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="middle">build</text>
+<rect x="584" y="60" width="120" height="32" rx="6" fill="#21262d" stroke="#30363d"/>
+<g class="p13"><rect class="mixfill" x="584" y="60" width="120" height="32" rx="6" fill="#da3633"/></g>
+<text x="644.0" y="81" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="middle" class="mixlabel0" opacity="0">답변</text>
+<text x="644.0" y="81" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle" class="mixlabel1">섞인 답변</text>
+<text x="702" y="34" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="12" font-weight="400" fill="#8b949e" text-anchor="end" class="hint1" opacity="0">작업 중 입력</text>
+<line class="mid" x1="324" y1="66" x2="324" y2="96" stroke="#f85149" stroke-width="3" stroke-linecap="round"/>
+<text x="324" y="118" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="12" font-weight="600" fill="#f85149" text-anchor="middle" class="mid">▲ 작업 중간에 끼어듦</text>
+<text x="844" y="118" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="700" fill="#f85149" text-anchor="end" class="out1">✕  요청 2개, 답변 1개</text>
+<g class="chipin1"><g class="chip1"><rect x="264" y="36" width="120" height="32" rx="16" fill="#388bfd" stroke="#f85149" class="hit" stroke-width="2.5"/><text x="324.0" y="57" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">릴리스 노트</text></g></g>
+</g>
+<g transform="translate(0,220)">
+<rect x="16" y="0" width="848" height="136" rx="12" fill="#161b22"/>
+<text x="36" y="66" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="28" font-weight="700" fill="#3fb950" text-anchor="start">/next</text>
+<text x="36" y="92" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="400" fill="#8b949e" text-anchor="start">대기열 명령</text>
+<rect x="200" y="60" width="120" height="32" rx="6" fill="#21262d" stroke="#30363d"/>
+<rect class="p20" x="200" y="60" width="120" height="32" rx="6" fill="#d97757"/>
+<text x="260.0" y="81" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="middle">lint</text>
+<rect x="328" y="60" width="120" height="32" rx="6" fill="#21262d" stroke="#30363d"/>
+<rect class="p21" x="328" y="60" width="120" height="32" rx="6" fill="#d97757"/>
+<text x="388.0" y="81" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="middle">test</text>
+<rect x="456" y="60" width="120" height="32" rx="6" fill="#21262d" stroke="#30363d"/>
+<rect class="p22" x="456" y="60" width="120" height="32" rx="6" fill="#d97757"/>
+<text x="516.0" y="81" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="middle">build</text>
+<rect x="584" y="60" width="120" height="32" rx="6" fill="#21262d" stroke="#30363d"/>
+<rect class="p23" x="584" y="60" width="120" height="32" rx="6" fill="#d97757"/>
+<text x="644.0" y="81" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="600" fill="#e6edf3" text-anchor="middle">답변</text>
+<text x="702" y="34" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="12" font-weight="400" fill="#8b949e" text-anchor="end" class="hint2" opacity="0">작업 중 입력</text>
+<text x="780.0" y="50" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="12" font-weight="600" fill="#8b949e" text-anchor="middle" class="queued" opacity="0">대기 중 …</text>
+<g class="div"><line x1="714" y1="44" x2="714" y2="100" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4 4"/><text x="708" y="50" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="12" font-weight="600" fill="#3fb950" text-anchor="end">턴 종료</text></g>
+<text x="844" y="118" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="700" fill="#3fb950" text-anchor="end" class="out2">✓  끝난 뒤 따로 실행</text>
+<g class="chipin2"><g class="chip2 wait"><rect x="720" y="60" width="120" height="32" rx="16" fill="#238636" class="go" stroke="#3fb950" stroke-width="1.5"/><text x="780.0" y="81" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic','Noto Sans CJK KR','Noto Sans CJK JP','Noto Sans',sans-serif" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">릴리스 노트</text></g></g>
+</g>
+<text x="848" y="380" font-family="ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace" font-size="12" font-weight="600" fill="#484f58" text-anchor="end">claude-next</text>
+</g>
+</svg>

@@ -2,58 +2,58 @@
 <title>Enter vs /next</title>
 <desc>Claude가 작업하는 중에 다음 요청을 입력하면: Enter — 작업 중간에 끼어듦, 요청 2개, 답변 1개. /next — 대기 중, 끝난 뒤 따로 실행.</desc>
 <style>
-@keyframes p10{0.00%{transform:scaleX(0)} 3.00%{transform:scaleX(0)} 20.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
-.p10{animation:p10 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
-@keyframes p11{0.00%{transform:scaleX(0)} 20.00%{transform:scaleX(0)} 38.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
-.p11{animation:p11 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
-@keyframes p12{0.00%{transform:scaleX(0)} 38.00%{transform:scaleX(0)} 54.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
-.p12{animation:p12 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
-@keyframes p13{0.00%{transform:scaleX(0)} 54.00%{transform:scaleX(0)} 64.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
-.p13{animation:p13 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
-@keyframes mixfill{0.00%{fill:#d97757} 64.00%{fill:#d97757} 67.00%{fill:#da3633} 100.00%{fill:#da3633}}
-.mixfill{animation:mixfill 10.0s linear infinite;}
-@keyframes mixlabel0{0.00%{opacity:1} 64.00%{opacity:1} 67.00%{opacity:0} 100.00%{opacity:0}}
-.mixlabel0{animation:mixlabel0 10.0s linear infinite;}
-@keyframes mixlabel1{0.00%{opacity:0} 64.00%{opacity:0} 67.00%{opacity:1} 100.00%{opacity:1}}
-.mixlabel1{animation:mixlabel1 10.0s linear infinite;}
-@keyframes hint1{0.00%{opacity:0} 9.00%{opacity:0} 12.00%{opacity:1} 21.00%{opacity:1} 24.00%{opacity:0} 100.00%{opacity:0}}
-.hint1{animation:hint1 10.0s linear infinite;}
-@keyframes chip1{0.00%{transform:translate(448px,-22px)} 20.00%{transform:translate(448px,-22px)} 24.00%{transform:translate(0px,0px)} 100.00%{transform:translate(0px,0px)}}
-.chip1{animation:chip1 10.0s linear infinite;}
-@keyframes hit{0.00%{stroke:#388bfd} 23.50%{stroke:#388bfd} 24.50%{stroke:#f85149} 100.00%{stroke:#f85149}}
-.hit{animation:hit 10.0s linear infinite;}
-@keyframes mid{0.00%{opacity:0} 24.00%{opacity:0} 27.00%{opacity:1} 100.00%{opacity:1}}
-.mid{animation:mid 10.0s linear infinite;}
-@keyframes out1{0.00%{opacity:0} 66.00%{opacity:0} 69.00%{opacity:1} 100.00%{opacity:1}}
-.out1{animation:out1 10.0s linear infinite;}
-@keyframes chipin1{0.00%{opacity:0} 9.00%{opacity:0} 12.00%{opacity:1} 100.00%{opacity:1}}
-.chipin1{animation:chipin1 10.0s linear infinite;}
-@keyframes p20{0.00%{transform:scaleX(0)} 3.00%{transform:scaleX(0)} 20.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
-.p20{animation:p20 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
-@keyframes p21{0.00%{transform:scaleX(0)} 20.00%{transform:scaleX(0)} 38.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
-.p21{animation:p21 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
-@keyframes p22{0.00%{transform:scaleX(0)} 38.00%{transform:scaleX(0)} 54.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
-.p22{animation:p22 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
-@keyframes p23{0.00%{transform:scaleX(0)} 54.00%{transform:scaleX(0)} 64.00%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
-.p23{animation:p23 10.0s linear infinite;transform-box:fill-box;transform-origin:0 50%}
-@keyframes hint2{0.00%{opacity:0} 9.00%{opacity:0} 12.00%{opacity:1} 21.00%{opacity:1} 24.00%{opacity:0} 100.00%{opacity:0}}
-.hint2{animation:hint2 10.0s linear infinite;}
-@keyframes chip2{0.00%{transform:translate(-8px,-46px)} 14.00%{transform:translate(-8px,-46px)} 18.00%{transform:translate(0px,0px)} 100.00%{transform:translate(0px,0px)}}
-.chip2{animation:chip2 10.0s linear infinite;}
-@keyframes wait{0.00%{opacity:1} 18.00%{opacity:1} 26.00%{opacity:.45} 36.00%{opacity:1} 46.00%{opacity:.45} 56.00%{opacity:1} 100.00%{opacity:1}}
-.wait{animation:wait 10.0s linear infinite;}
-@keyframes go{0.00%{fill:#388bfd;stroke:#388bfd;stroke-dasharray:none} 18.00%{fill:#161b22;stroke:#8b949e;stroke-dasharray:5 4} 64.00%{fill:#161b22;stroke:#8b949e;stroke-dasharray:5 4} 67.00%{fill:#238636;stroke:#3fb950;stroke-dasharray:none} 100.00%{fill:#238636;stroke:#3fb950;stroke-dasharray:none}}
-.go{animation:go 10.0s linear infinite;}
-@keyframes queued{0.00%{opacity:0} 18.00%{opacity:0} 20.00%{opacity:1} 64.00%{opacity:1} 66.00%{opacity:0} 100.00%{opacity:0}}
-.queued{animation:queued 10.0s linear infinite;}
-@keyframes div{0.00%{opacity:0} 64.00%{opacity:0} 67.00%{opacity:1} 100.00%{opacity:1}}
-.div{animation:div 10.0s linear infinite;}
-@keyframes out2{0.00%{opacity:0} 68.00%{opacity:0} 71.00%{opacity:1} 100.00%{opacity:1}}
-.out2{animation:out2 10.0s linear infinite;}
-@keyframes chipin2{0.00%{opacity:0} 9.00%{opacity:0} 12.00%{opacity:1} 100.00%{opacity:1}}
-.chipin2{animation:chipin2 10.0s linear infinite;}
-@keyframes scene{0.00%{opacity:0} 2.50%{opacity:1} 93.00%{opacity:1} 98.00%{opacity:0} 100.00%{opacity:0}}
-.scene{animation:scene 10.0s linear infinite;}
+@keyframes p10{0.00%{transform:scaleX(1)} 18.86%{transform:scaleX(1)} 18.95%{transform:scaleX(0)} 21.05%{transform:scaleX(0)} 23.68%{transform:scaleX(0)} 38.60%{transform:scaleX(1)} 85.96%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p10{animation:p10 11.4s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p11{0.00%{transform:scaleX(1)} 18.86%{transform:scaleX(1)} 18.95%{transform:scaleX(0)} 21.05%{transform:scaleX(0)} 38.60%{transform:scaleX(0)} 54.39%{transform:scaleX(1)} 85.96%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p11{animation:p11 11.4s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p12{0.00%{transform:scaleX(1)} 18.86%{transform:scaleX(1)} 18.95%{transform:scaleX(0)} 21.05%{transform:scaleX(0)} 54.39%{transform:scaleX(0)} 68.42%{transform:scaleX(1)} 85.96%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p12{animation:p12 11.4s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p13{0.00%{transform:scaleX(1)} 18.86%{transform:scaleX(1)} 18.95%{transform:scaleX(0)} 21.05%{transform:scaleX(0)} 68.42%{transform:scaleX(0)} 77.19%{transform:scaleX(1)} 85.96%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p13{animation:p13 11.4s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes mixfill{0.00%{fill:#da3633} 18.86%{fill:#da3633} 18.95%{fill:#d97757} 21.05%{fill:#d97757} 77.19%{fill:#d97757} 79.82%{fill:#da3633} 85.96%{fill:#da3633} 100.00%{fill:#da3633}}
+.mixfill{animation:mixfill 11.4s linear infinite;}
+@keyframes mixlabel0{0.00%{opacity:0} 18.86%{opacity:0} 18.95%{opacity:1} 21.05%{opacity:1} 77.19%{opacity:1} 79.82%{opacity:0} 85.96%{opacity:0} 100.00%{opacity:0}}
+.mixlabel0{animation:mixlabel0 11.4s linear infinite;}
+@keyframes mixlabel1{0.00%{opacity:1} 18.86%{opacity:1} 18.95%{opacity:0} 21.05%{opacity:0} 77.19%{opacity:0} 79.82%{opacity:1} 85.96%{opacity:1} 100.00%{opacity:1}}
+.mixlabel1{animation:mixlabel1 11.4s linear infinite;}
+@keyframes hint1{0.00%{opacity:0} 18.86%{opacity:0} 18.95%{opacity:0} 21.05%{opacity:0} 28.95%{opacity:0} 31.58%{opacity:1} 39.47%{opacity:1} 42.11%{opacity:0} 85.96%{opacity:0} 100.00%{opacity:0}}
+.hint1{animation:hint1 11.4s linear infinite;}
+@keyframes chip1{0.00%{transform:translate(0px,0px)} 18.86%{transform:translate(0px,0px)} 18.95%{transform:translate(448px,-22px)} 21.05%{transform:translate(448px,-22px)} 38.60%{transform:translate(448px,-22px)} 42.11%{transform:translate(0px,0px)} 85.96%{transform:translate(0px,0px)} 100.00%{transform:translate(0px,0px)}}
+.chip1{animation:chip1 11.4s linear infinite;}
+@keyframes hit{0.00%{stroke:#f85149} 18.86%{stroke:#f85149} 18.95%{stroke:#388bfd} 21.05%{stroke:#388bfd} 41.67%{stroke:#388bfd} 42.54%{stroke:#f85149} 85.96%{stroke:#f85149} 100.00%{stroke:#f85149}}
+.hit{animation:hit 11.4s linear infinite;}
+@keyframes mid{0.00%{opacity:1} 18.86%{opacity:1} 18.95%{opacity:0} 21.05%{opacity:0} 42.11%{opacity:0} 44.74%{opacity:1} 85.96%{opacity:1} 100.00%{opacity:1}}
+.mid{animation:mid 11.4s linear infinite;}
+@keyframes out1{0.00%{opacity:1} 18.86%{opacity:1} 18.95%{opacity:0} 21.05%{opacity:0} 78.95%{opacity:0} 81.58%{opacity:1} 85.96%{opacity:1} 100.00%{opacity:1}}
+.out1{animation:out1 11.4s linear infinite;}
+@keyframes chipin1{0.00%{opacity:1} 18.86%{opacity:1} 18.95%{opacity:0} 21.05%{opacity:0} 28.95%{opacity:0} 31.58%{opacity:1} 85.96%{opacity:1} 100.00%{opacity:1}}
+.chipin1{animation:chipin1 11.4s linear infinite;}
+@keyframes p20{0.00%{transform:scaleX(1)} 18.86%{transform:scaleX(1)} 18.95%{transform:scaleX(0)} 21.05%{transform:scaleX(0)} 23.68%{transform:scaleX(0)} 38.60%{transform:scaleX(1)} 85.96%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p20{animation:p20 11.4s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p21{0.00%{transform:scaleX(1)} 18.86%{transform:scaleX(1)} 18.95%{transform:scaleX(0)} 21.05%{transform:scaleX(0)} 38.60%{transform:scaleX(0)} 54.39%{transform:scaleX(1)} 85.96%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p21{animation:p21 11.4s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p22{0.00%{transform:scaleX(1)} 18.86%{transform:scaleX(1)} 18.95%{transform:scaleX(0)} 21.05%{transform:scaleX(0)} 54.39%{transform:scaleX(0)} 68.42%{transform:scaleX(1)} 85.96%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p22{animation:p22 11.4s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes p23{0.00%{transform:scaleX(1)} 18.86%{transform:scaleX(1)} 18.95%{transform:scaleX(0)} 21.05%{transform:scaleX(0)} 68.42%{transform:scaleX(0)} 77.19%{transform:scaleX(1)} 85.96%{transform:scaleX(1)} 100.00%{transform:scaleX(1)}}
+.p23{animation:p23 11.4s linear infinite;transform-box:fill-box;transform-origin:0 50%}
+@keyframes hint2{0.00%{opacity:0} 18.86%{opacity:0} 18.95%{opacity:0} 21.05%{opacity:0} 28.95%{opacity:0} 31.58%{opacity:1} 39.47%{opacity:1} 42.11%{opacity:0} 85.96%{opacity:0} 100.00%{opacity:0}}
+.hint2{animation:hint2 11.4s linear infinite;}
+@keyframes chip2{0.00%{transform:translate(0px,0px)} 18.86%{transform:translate(0px,0px)} 18.95%{transform:translate(-8px,-46px)} 21.05%{transform:translate(-8px,-46px)} 33.33%{transform:translate(-8px,-46px)} 36.84%{transform:translate(0px,0px)} 85.96%{transform:translate(0px,0px)} 100.00%{transform:translate(0px,0px)}}
+.chip2{animation:chip2 11.4s linear infinite;}
+@keyframes wait{0.00%{opacity:1} 18.86%{opacity:1} 18.95%{opacity:1} 21.05%{opacity:1} 36.84%{opacity:1} 43.86%{opacity:.45} 52.63%{opacity:1} 61.40%{opacity:.45} 70.18%{opacity:1} 85.96%{opacity:1} 100.00%{opacity:1}}
+.wait{animation:wait 11.4s linear infinite;}
+@keyframes go{0.00%{fill:#238636;stroke:#3fb950;stroke-dasharray:none} 18.86%{fill:#238636;stroke:#3fb950;stroke-dasharray:none} 18.95%{fill:#388bfd;stroke:#388bfd;stroke-dasharray:none} 21.05%{fill:#388bfd;stroke:#388bfd;stroke-dasharray:none} 36.84%{fill:#161b22;stroke:#8b949e;stroke-dasharray:5 4} 77.19%{fill:#161b22;stroke:#8b949e;stroke-dasharray:5 4} 79.82%{fill:#238636;stroke:#3fb950;stroke-dasharray:none} 85.96%{fill:#238636;stroke:#3fb950;stroke-dasharray:none} 100.00%{fill:#238636;stroke:#3fb950;stroke-dasharray:none}}
+.go{animation:go 11.4s linear infinite;}
+@keyframes queued{0.00%{opacity:0} 18.86%{opacity:0} 18.95%{opacity:0} 21.05%{opacity:0} 36.84%{opacity:0} 38.60%{opacity:1} 77.19%{opacity:1} 78.95%{opacity:0} 85.96%{opacity:0} 100.00%{opacity:0}}
+.queued{animation:queued 11.4s linear infinite;}
+@keyframes div{0.00%{opacity:1} 18.86%{opacity:1} 18.95%{opacity:0} 21.05%{opacity:0} 77.19%{opacity:0} 79.82%{opacity:1} 85.96%{opacity:1} 100.00%{opacity:1}}
+.div{animation:div 11.4s linear infinite;}
+@keyframes out2{0.00%{opacity:1} 18.86%{opacity:1} 18.95%{opacity:0} 21.05%{opacity:0} 80.70%{opacity:0} 83.33%{opacity:1} 85.96%{opacity:1} 100.00%{opacity:1}}
+.out2{animation:out2 11.4s linear infinite;}
+@keyframes chipin2{0.00%{opacity:1} 18.86%{opacity:1} 18.95%{opacity:0} 21.05%{opacity:0} 28.95%{opacity:0} 31.58%{opacity:1} 85.96%{opacity:1} 100.00%{opacity:1}}
+.chipin2{animation:chipin2 11.4s linear infinite;}
+@keyframes scene{0.00%{opacity:1} 15.79%{opacity:1} 18.42%{opacity:0} 20.18%{opacity:0} 21.93%{opacity:1} 100.00%{opacity:1}}
+.scene{animation:scene 11.4s linear infinite;}
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
 </style>
 <rect x="0.5" y="0.5" width="879" height="399" rx="18" fill="#0d1117" stroke="#30363d"/>

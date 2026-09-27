@@ -7,7 +7,7 @@ animation (or with reduced motion) still see the whole story.
 """
 from pathlib import Path
 
-W, H, LOOP = 880, 400, 10.0  # canvas size, loop length in seconds
+W, H = 880, 400  # canvas size
 
 STRINGS = {
     "en": dict(
@@ -43,10 +43,15 @@ MONO = "ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',m
 C = dict(bg="#0d1117", lane="#161b22", line="#30363d", seg="#21262d", text="#e6edf3", dim="#8b949e",
          run="#d97757", red="#f85149", redfill="#da3633", green="#3fb950", greenfill="#238636", chip="#388bfd")
 
-# Timeline, in seconds
+# Story timeline, in seconds from when the task starts
 LINT, TEST, BUILD, REPLY = (0.3, 2.0), (2.0, 3.8), (3.8, 5.4), (5.4, 6.4)
 CHIP_IN = 0.9
-FADE_OUT = (9.3, 9.8)
+END = 7.4  # every element has reached its final state by now
+
+# The loop opens on the finished picture, so a paused or unanimated render still tells the whole story.
+# It then fades out, resets while invisible (RESET), plays the story from START, and holds the result.
+RESET, START = 2.15, 2.4
+LOOP = START + END + 1.6
 
 SEG_X, SEG_W, GAP = 200, 120, 8
 TRACK_Y, TRACK_H = 60, 32
@@ -68,7 +73,11 @@ class Anim:
     def __init__(self):
         self.rules = []
 
-    def add(self, name, frames, extra=""):
+    def add(self, name, frames, extra="", story=True):
+        if story:  # frames run from story time 0 (initial state) to END (final state)
+            first, last = frames[0][1], frames[-1][1]
+            frames = ([(0, last), (RESET, last), (RESET + 0.01, first)]
+                      + [(START + t, p) for t, p in frames] + [(LOOP, last)])
         body = " ".join(f"{pct(t)}{{{props}}}" for t, props in frames)
         self.rules.append(f"@keyframes {name}{{{body}}}")
         self.rules.append(f".{name}{{animation:{name} {LOOP}s linear infinite;{extra}}}")
@@ -79,13 +88,13 @@ def seg_progress(anim, lane, i, span):
     start, end = span
     return anim.add(f"p{lane}{i}", [
         (0, "transform:scaleX(0)"), (start, "transform:scaleX(0)"),
-        (end, "transform:scaleX(1)"), (LOOP, "transform:scaleX(1)"),
+        (end, "transform:scaleX(1)"), (END, "transform:scaleX(1)"),
     ], "transform-box:fill-box;transform-origin:0 50%")
 
 
-def appear(anim, name, at, until=LOOP, dur=0.3):
+def appear(anim, name, at, dur=0.3):
     return anim.add(name, [
-        (0, "opacity:0"), (at, "opacity:0"), (at + dur, "opacity:1"), (LOOP, "opacity:1"),
+        (0, "opacity:0"), (at, "opacity:0"), (at + dur, "opacity:1"), (END, "opacity:1"),
     ])
 
 
@@ -97,7 +106,7 @@ def move(anim, name, start, stops):
         frames.append((t0, f"transform:translate({pos[0]}px,{pos[1]}px)"))
         frames.append((t1, f"transform:translate({dest[0]}px,{dest[1]}px)"))
         pos = dest
-    frames.append((LOOP, f"transform:translate({pos[0]}px,{pos[1]}px)"))
+    frames.append((END, f"transform:translate({pos[0]}px,{pos[1]}px)"))
     return anim.add(name, frames)
 
 
@@ -122,11 +131,11 @@ def lane(anim, n, y, s, name, name_color):
         fill = C["run"]
         if n == 1 and i == 3:  # lane 1's reply turns red once it's done: two answers in one
             red = anim.add("mixfill", [(0, f"fill:{C['run']}"), (REPLY[1], f"fill:{C['run']}"),
-                                       (REPLY[1] + 0.3, f"fill:{C['redfill']}"), (LOOP, f"fill:{C['redfill']}")])
+                                       (REPLY[1] + 0.3, f"fill:{C['redfill']}"), (END, f"fill:{C['redfill']}")])
             out.append(f'<g class="{cls}"><rect class="{red}" x="{x}" y="{TRACK_Y}" width="{SEG_W}" '
                        f'height="{TRACK_H}" rx="6" fill="{C["redfill"]}"/></g>')
             before = anim.add("mixlabel0", [(0, "opacity:1"), (REPLY[1], "opacity:1"),
-                                            (REPLY[1] + 0.3, "opacity:0"), (LOOP, "opacity:0")])
+                                            (REPLY[1] + 0.3, "opacity:0"), (END, "opacity:0")])
             after = appear(anim, "mixlabel1", REPLY[1])
             cx = x + SEG_W / 2
             out.append(text(cx, TRACK_Y + 21, label, 13, C["text"], 600, "middle", MONO, before, ' opacity="0"'))
@@ -138,7 +147,7 @@ def lane(anim, n, y, s, name, name_color):
 
     # "typed mid-task" hint next to where the chip first shows up
     hint = anim.add(f"hint{n}", [(0, "opacity:0"), (CHIP_IN, "opacity:0"), (CHIP_IN + 0.3, "opacity:1"),
-                                 (CHIP_IN + 1.2, "opacity:1"), (CHIP_IN + 1.5, "opacity:0"), (LOOP, "opacity:0")])
+                                 (CHIP_IN + 1.2, "opacity:1"), (CHIP_IN + 1.5, "opacity:0"), (END, "opacity:0")])
     out.append(text(CHIP_START[0] - 10, CHIP_START[1] + 20, s["typed"], 12, C["dim"], 400, "end", cls=hint,
                     extra=' opacity="0"'))
 
@@ -147,7 +156,7 @@ def lane(anim, n, y, s, name, name_color):
         mv = move(anim, "chip1", (CHIP_START[0] - end[0], CHIP_START[1] - end[1]),
                   [(LINT[1], LINT[1] + 0.4, (0, 0))])
         stroke = anim.add("hit", [(0, f"stroke:{C['chip']}"), (LINT[1] + 0.35, f"stroke:{C['chip']}"),
-                                  (LINT[1] + 0.45, f"stroke:{C['red']}"), (LOOP, f"stroke:{C['red']}")])
+                                  (LINT[1] + 0.45, f"stroke:{C['red']}"), (END, f"stroke:{C['red']}")])
         chip_fill = C["chip"]
         call = appear(anim, "mid", LINT[1] + 0.4)
         out.append(f'<line class="{call}" x1="{BOUNDARY}" y1="{TRACK_Y + 6}" x2="{BOUNDARY}" y2="{TRACK_Y + TRACK_H + 4}" '
@@ -164,14 +173,14 @@ def lane(anim, n, y, s, name, name_color):
                   [(CHIP_IN + 0.5, CHIP_IN + 0.9, (0, 0))])
         # waits dashed & dim, then becomes a solid green turn of its own
         wait = anim.add("wait", [(0, "opacity:1"), (CHIP_IN + 0.9, "opacity:1"), (2.6, "opacity:.45"),
-                                 (3.6, "opacity:1"), (4.6, "opacity:.45"), (5.6, "opacity:1"), (LOOP, "opacity:1")])
+                                 (3.6, "opacity:1"), (4.6, "opacity:.45"), (5.6, "opacity:1"), (END, "opacity:1")])
         fill = anim.add("go", [(0, f"fill:{C['chip']};stroke:{C['chip']};stroke-dasharray:none"),
                                (CHIP_IN + 0.9, f"fill:{C['lane']};stroke:{C['dim']};stroke-dasharray:5 4"),
                                (REPLY[1], f"fill:{C['lane']};stroke:{C['dim']};stroke-dasharray:5 4"),
                                (REPLY[1] + 0.3, f"fill:{C['greenfill']};stroke:{C['green']};stroke-dasharray:none"),
-                               (LOOP, f"fill:{C['greenfill']};stroke:{C['green']};stroke-dasharray:none")])
+                               (END, f"fill:{C['greenfill']};stroke:{C['green']};stroke-dasharray:none")])
         q = anim.add("queued", [(0, "opacity:0"), (CHIP_IN + 0.9, "opacity:0"), (CHIP_IN + 1.1, "opacity:1"),
-                                (REPLY[1], "opacity:1"), (REPLY[1] + 0.2, "opacity:0"), (LOOP, "opacity:0")])
+                                (REPLY[1], "opacity:1"), (REPLY[1] + 0.2, "opacity:0"), (END, "opacity:0")])
         out.append(text(end[0] + CHIP_W / 2, TRACK_Y - 10, s["queued"] + " …", 12, C["dim"], 600, "middle",
                         cls=q, extra=' opacity="0"'))
         div = appear(anim, "div", REPLY[1])
@@ -205,8 +214,9 @@ def build(lang):
         lane(anim, 2, 220, s, "/next", C["green"]),
         text(W - 32, H - 20, "claude-next", 12, "#484f58", 600, "end", MONO),
     ]
-    scene = anim.add("scene", [(0, "opacity:0"), (0.25, "opacity:1"), (FADE_OUT[0], "opacity:1"),
-                               (FADE_OUT[1], "opacity:0"), (LOOP, "opacity:0")])
+    scene = anim.add("scene", [(0, "opacity:1"), (RESET - 0.35, "opacity:1"), (RESET - 0.05, "opacity:0"),
+                               (START - 0.1, "opacity:0"), (START + 0.1, "opacity:1"), (LOOP, "opacity:1")],
+                     story=False)
     css = "\n".join(anim.rules)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" lang="{lang}">
 <title>Enter vs /next</title>

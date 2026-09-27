@@ -25,7 +25,7 @@ config_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 for bin in tmux jq claude uuidgen; do
   command -v "$bin" >/dev/null || { echo "Missing command: $bin" >&2; exit 2; }
 done
-[[ -f "$config_dir/skills/next/SKILL.md" ]] || { echo "Run ./install.sh first." >&2; exit 2; }
+[[ -f "$config_dir/skills/next/SKILL.md" ]] || { echo "Install the skill first: npx claude-next-skill" >&2; exit 2; }
 
 sid="$(uuidgen | tr 'A-Z' 'a-z')"
 cleanup() { tmux kill-session -t "$TMUX_SESSION" 2>/dev/null || true; }

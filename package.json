@@ -1,0 +1,30 @@
+{
+  "name": "claude-next-skill",
+  "version": "1.0.0",
+  "description": "Queue your next request in Claude Code without interrupting the current one. Installs the /next skill.",
+  "bin": {
+    "claude-next-skill": "bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "skills/"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "claude-code-skill",
+    "anthropic",
+    "skill",
+    "queue"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seokwoooo/claude-next.git"
+  },
+  "homepage": "https://github.com/Seokwoooo/claude-next#readme",
+  "license": "MIT",
+  "author": "Seokwoooo"
+}

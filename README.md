@@ -2,7 +2,7 @@
 
 # /next
 
-**Queue your next request in Claude Code — without interrupting the one in progress.**
+**Queue your next request in Claude Code without interrupting the one in progress.**
 
 English · [한국어](README.ko.md) · [日本語](README.ja.md)
 
@@ -10,54 +10,43 @@ English · [한국어](README.ko.md) · [日本語](README.ja.md)
 
 </div>
 
-## Why
-
-Claude is halfway through a task and you already know what comes next. You type it and press Enter.
-
-That message doesn't wait. Claude Code hands it to Claude **as soon as the current tool call finishes, in the middle of the task**. Now Claude is juggling two requests in one turn, and the answers come back mixed.
-
-Slash commands are handled differently. Claude Code **holds them until the turn ends**, then runs them one at a time, in the order you queued them ([docs](https://code.claude.com/docs/en/interactive-mode#when-claude-code-sends-what-you-queued)). `/next` is a one-line skill that uses that queue on purpose.
-
-| While Claude is working, you type… | It reaches Claude… | What you get |
-|---|---|---|
-| `release note please` ⏎ | right after the current tool call, **mid-task** | both requests handled in one turn |
-| `/next release note please` ⏎ | **after the turn ends** | a clean, separate turn, in order |
-
 ## Install
 
-One line, no clone:
-
 ```bash
-mkdir -p ~/.claude/skills/next && curl -fsSL https://raw.githubusercontent.com/Seokwoooo/claude-next/main/skills/next/SKILL.md -o ~/.claude/skills/next/SKILL.md
+npx claude-next-skill
 ```
 
-Or clone and link it, so `git pull` keeps it up to date:
+Or paste this into Claude Code (or any coding agent) and let it install for you:
 
-```bash
-git clone https://github.com/Seokwoooo/claude-next.git
-cd claude-next && ./install.sh     # ./install.sh --uninstall to remove
+```text
+Install the /next skill for Claude Code by running `npx -y claude-next-skill`.
+If npx isn't available, download https://raw.githubusercontent.com/Seokwoooo/claude-next/main/skills/next/SKILL.md and save it unchanged as ~/.claude/skills/next/SKILL.md.
+When it's done, tell me to open a new Claude Code session.
 ```
 
-On Windows, save [`skills/next/SKILL.md`](skills/next/SKILL.md) as `%USERPROFILE%\.claude\skills\next\SKILL.md`.
-
-Then open a new Claude Code session and type `/next`.
+Open a new Claude Code session after installing.
 
 ## Usage
 
+While Claude is working, type:
+
 ```text
-/next run the full test suite and fix anything that fails
+/next run the tests and fix anything that fails
 ```
 
-- **Queue several.** Press Enter after each `/next`. They run in order, each as its own turn, and each one waits until the previous one has finished, tool calls included.
-- **Cancel or edit.** With the input box empty, press `↑`. Everything you queued comes back into the input box, one per line. Delete what you don't want (`Ctrl+U` clears a line, or `Cmd+Backspace` in macOS terminals), then press Enter to queue the rest again, or leave the box empty to cancel all of it.
-  - Don't use `Ctrl+C` to clear the box while Claude is working. It interrupts the task.
-  - Lines you queue again become **one** entry. That's fine for one line; for several, queue them one at a time.
-- **Stop early.** `Esc` interrupts the current turn, and your queued `/next` runs right away.
-- `/next` only works at the very start of a message.
+It waits until the current turn ends, then runs as a new turn.
 
-## How it works
+- **Queue several:** press Enter after each one. They run in order, one turn each.
+- **Cancel:** with the input box empty, press `↑`, delete the line, and press Enter. Don't use `Ctrl+C` for this, it stops Claude.
 
-This is the whole skill:
+## Why
+
+While Claude is working, a normal message is handed to Claude as soon as the current tool call finishes, in the middle of the task. Slash commands wait until the turn ends ([docs](https://code.claude.com/docs/en/interactive-mode#when-claude-code-sends-what-you-queued)). `/next` is a one-line skill built on that.
+
+<details>
+<summary><b>How it works</b></summary>
+
+This is the whole skill ([`skills/next/SKILL.md`](skills/next/SKILL.md)):
 
 ```markdown
 ---
@@ -70,33 +59,45 @@ disable-model-invocation: true
 Treat the following as the user's follow-up request and carry it out now, continuing from the current conversation: $ARGUMENTS
 ```
 
-- **The waiting isn't in the skill.** Claude Code's command queue holds `/next` until the turn ends. The skill only hands over your request when its turn comes, so there's nothing to poll, store or watch.
-- **Only you can run it.** With `disable-model-invocation: true`, Claude never sees this skill in its list and can't call it on its own, and its description costs no context.
-- **Minimal context.** The frontmatter isn't sent to Claude. When `/next` runs, Claude gets that one line plus your request.
+- Claude Code's command queue does the waiting. The skill only hands over your request when its turn comes.
+- `disable-model-invocation: true` means only you can run it. Claude never sees it in its skill list, so it costs no context until you use it.
 
-## Verified
+</details>
 
-[`tests/verify.sh`](tests/verify.sh) starts a real interactive Claude Code session in tmux, queues two `/next` commands while a multi-step task is running, and reads the session transcript to check what reached Claude and when:
+<details>
+<summary><b>Update, uninstall, manual install</b></summary>
+
+- Update: run `npx claude-next-skill` again.
+- Uninstall: `npx claude-next-skill uninstall`
+- Without Node: save [`skills/next/SKILL.md`](skills/next/SKILL.md) as `~/.claude/skills/next/SKILL.md` (on Windows, `%USERPROFILE%\.claude\skills\next\SKILL.md`).
+
+</details>
+
+<details>
+<summary><b>Tested</b></summary>
+
+[`tests/verify.sh`](tests/verify.sh) drives a real Claude Code session in tmux, queues two `/next` commands during a multi-step task, and reads the session transcript to check what reached Claude and when. It passes on Claude Code 2.1.283 (macOS):
 
 ```text
-✓ first turn ended with FIRST_DONE
 ✓ both /next were queued during the first turn (2/2)
 ✓ neither /next reached Claude during the first turn (leaks: 0)
-✓ the first /next used tools (2 tool calls)
 ✓ the second /next didn't reach Claude during the first /next (leaks: 0)
 ✓ each /next ran as its own turn (2/2)
 ✓ reply order: FIRST_DONE -> SECOND_DONE -> THIRD_DONE
-PASS
 ```
 
-Passes on Claude Code 2.1.283 (macOS). As a control, a plain message queued the same way was delivered right after the first tool call. After updating Claude Code, run `tests/verify.sh` again (needs `tmux` and `jq`, about a minute on Haiku).
+Run it again after updating Claude Code (needs `tmux` and `jq`).
 
-## Limits
+</details>
 
-- "Done" means **the main turn ended**. Background commands or agents Claude started may still be running.
-- Permission prompts still apply. `/next` doesn't skip any approvals.
-- It's a personal skill (`~/.claude/skills`), so it loads in local sessions on your machine but not in cloud sessions.
-- It relies on Claude Code's command queue. If a future version changes that behavior, `tests/verify.sh` will catch it.
+<details>
+<summary><b>Limits</b></summary>
+
+- It waits for the main turn to end, not for background tasks Claude started.
+- Permission prompts still apply.
+- It's a personal skill, so it works in local sessions on your machine, not in cloud sessions.
+
+</details>
 
 ## License
 
